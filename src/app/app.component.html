@@ -1,0 +1,43 @@
+<div class="input-group mb-3">
+  <input type="text" [(ngModel)]="this.myPromt" class="form-control" placeholder="Enter prompt" aria-label="Enter prompt" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" (click)="SearchProduct()">Search</button>
+  </div>
+</div>
+<!-- Conditionally hide or show this div -->
+<div *ngIf="products.length > 0">
+<div class="container-fluid">
+        <div class="row p-2 bg-info">
+            <div class="col-3">
+                <h3>Product List</h3>
+            </div>           
+        </div>
+        <!-- Use *ngIf for conditional rendering --> 
+        <div *ngIf="products && products.length > 0; else noProducts">       
+       <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>price</th>
+                    <th>Rate</th>
+                    <th>ECommerce Name</th>
+                </tr>
+            </thead>
+            <tbody>                
+                <tr  *ngFor="let product of products; let i = index">
+                    <td>{{ product.description}}</td>
+                    <td>{{ product.price}}</td>
+                    <td>{{ product.rating }}</td>
+                    <td><a href={{product.link}} target="_blank">{{ product.source }}></a></td>                               
+                </tr>                
+            </tbody>
+        </table>
+        </div>
+        <h5 class="text-center p-5">product Not Found</h5>
+        <!-- Define the else template -->
+  <ng-template #noProducts>
+    <h5 class="text-center p-5">Product Not Found</h5>
+  </ng-template>
+    </div>
+</div>
+    
